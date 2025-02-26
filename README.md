@@ -1,39 +1,53 @@
-[![progress-banner](https://backend.codecrafters.io/progress/grep/a43c841f-b4c4-40e4-a4f4-c6300ea4594a)](https://app.codecrafters.io/users/codecrafters-bot?r=2qF)
+# Custom Regex Engine
 
-This is a starting point for Python solutions to the
-["Build Your Own grep" Challenge](https://app.codecrafters.io/courses/grep/overview).
+## Overview
+This project implements a lightweight custom regex engine in Python that supports basic pattern matching without using Python's built-in `re` module. The matcher works recursively to process input strings against a defined pattern.
 
-[Regular expressions](https://en.wikipedia.org/wiki/Regular_expression)
-(Regexes, for short) are patterns used to match character combinations in
-strings. [`grep`](https://en.wikipedia.org/wiki/Grep) is a CLI tool for
-searching using Regexes.
+## Features
+The engine currently supports:
+- **Literal Character Matching**: Matches characters in the pattern exactly.
+- **Character Classes**: Supports character sets like `[abc]` and negated sets like `[^abc]`.
+- **Wildcard (`.`)**: Matches any single character.
+- **Digit (`\d`) and Alphanumeric (`\w`) Shortcuts**:
+  - `\d` matches any numeric digit (0-9).
+  - `\w` matches any alphanumeric character (a-z, A-Z, 0-9, and `_`).
+- **Anchors (`^` and `$`)**:
+  - `^` matches the beginning of the string.
+  - `$` matches the end of the string.
+- **Quantifiers**:
+  - `+` (one or more occurrences of a character)
+  - `?` (zero or one occurrence of a character)
+- **Pattern Searching**: If no `^` anchor is used, the pattern can match anywhere in the string.
 
-In this challenge you'll build your own implementation of `grep`. Along the way
-we'll learn about Regex syntax, how parsers/lexers work, and how regular
-expressions are evaluated.
-
-**Note**: If you're viewing this repo on GitHub, head over to
-[codecrafters.io](https://codecrafters.io) to try the challenge.
-
-# Passing the first stage
-
-The entry point for your `grep` implementation is in `app/main.py`. Study and
-uncomment the relevant code, and push your changes to pass the first stage:
-
+## Usage
+To use this regex engine, run the script with the following command:
 ```sh
-git add .
-git commit -m "pass 1st stage" # any msg
-git push origin master
+python script.py -E "pattern"
 ```
+Where:
+- `script.py` is the name of your Python file.
+- `-E` is required as the first argument.
+- `"pattern"` is the regex pattern to match against input from `stdin`.
 
-Time to move on to the next stage!
+### Example:
+#### Command:
+```sh
+echo "hello123" | python script.py -E "\w+"
+```
+#### Output:
+Returns exit code `0` (match found) or `1` (no match).
 
-# Stage 2 & beyond
+## Updates and Planned Improvements
+### Current Focus:
+- **Multiple and Nested Backreferences**: Allow references to previously captured groups in patterns (e.g., `(\w+) and \1` should match `word and word`).
+- **Group Capturing and Alternation (`|`)**: Implement support for capturing groups `( ... )` and alternatives using `|`.
+- **Advanced Character Classes**: Extend support for predefined classes like `\s` (whitespace) and `\b` (word boundaries).
+- **Better Error Handling**: Improve handling of malformed patterns (e.g., unmatched brackets or parentheses).
 
-Note: This section is for stages 2 and beyond.
+### Future Enhancements:
+- **Lookahead and Lookbehind Support**: Enable checking for patterns before or after the current match without consuming characters.
+- **Optimized Matching Algorithm**: Improve performance for large strings and complex patterns.
+- **Support for `{min,max}` Quantifiers**: Extend quantifier functionality beyond `+` and `?`.
 
-1. Ensure you have `python (3.11)` installed locally
-1. Run `./your_program.sh` to run your program, which is implemented in
-   `app/main.py`.
-1. Commit your changes and run `git push origin master` to submit your solution
-   to CodeCrafters. Test output will be streamed to your terminal.
+## Contributing
+If you’d like to contribute, feel free to submit an issue or pull request.
