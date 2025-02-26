@@ -1,7 +1,7 @@
 # Custom Regex Engine
 
 ## Overview
-This project implements a lightweight custom regex engine in Python that supports basic pattern matching without using Python's built-in `re` module. The matcher works recursively to process input strings against a defined pattern.
+This project implements a lightweight custom grep-like utility with its own regex engine in Python that supports basic pattern matching without using built-in `re` module. The matcher works recursively to process input strings against a defined pattern.
 
 ## Features
 The engine currently supports:
