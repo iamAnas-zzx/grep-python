@@ -1,4 +1,4 @@
-# Custom Regex Engine
+# Custom grep-utility Tool
 
 ## Overview
 This project implements a lightweight custom grep-like utility with its own regex engine in Python that supports basic pattern matching without using built-in `re` module. The matcher works recursively to process input strings against a defined pattern.
